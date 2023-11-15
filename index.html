@@ -3,52 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sample HTML Page</title>
+    <title>Position Sizing Calculator</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 20px;
+            background-color: #f4f4f4;
         }
 
-        h1 {
-            color: #007bff;
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input {
+            width: calc(100% - 16px);
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h3 {
+            margin-top: 20px;
+            color: #333;
         }
 
         p {
-            line-height: 1.6;
+            color: #555;
+            opacity: 0;
+            animation: fadeIn 1s forwards 0.5s;
+        }
+
+        button#resetButton {
+            background-color: #bbb;
+            color: #fff;
+            margin-top: 15px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Website</h1>
-    </header>
+    <h2>Position Sizing Calculator</h2>
+    <form id="positionSizer">
+        <label for="maxLoss">Max Loss ($):</label>
+        <input type="number" id="maxLoss" required>
 
-    <nav>
-        <ul>
-            <li><a href="#section1">Section 1</a></li>
-            <li><a href="#section2">Section 2</a></li>
-            <li><a href="#section3">Section 3</a></li>
-        </ul>
-    </nav>
+        <label for="stopLossPoints">Stop Loss (Points):</label>
+        <input type="number" id="stopLossPoints" required>
 
-    <section id="section1">
-        <h2>Section 1</h2>
-        <p>This is the content of Section 1.</p>
-    </section>
+        <button type="button" onclick="calculatePositionSize()">Calculate</button>
+    </form>
 
-    <section id="section2">
-        <h2>Section 2</h2>
-        <p>This is the content of Section 2.</p>
-    </section>
+    <h3>Result:</h3>
+    <p id="positionSizeResult">Fill in the details and click 'Calculate'.</p>
 
-    <section id="section3">
-        <h2>Section 3</h2>
-        <p>This is the content of Section 3.</p>
-    </section>
+    <button id="resetButton" onclick="resetForm()">Reset Form</button>
 
-    <footer>
-        <p>&copy; 2023 My Website. All rights reserved.</p>
-    </footer>
+    <script>
+        // Your JavaScript code here
+    </script>
 </body>
 </html>
