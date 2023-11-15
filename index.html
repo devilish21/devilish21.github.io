@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Position Sizing Calculator</title>
+    <title>Position Sizing Calculators</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -16,7 +16,7 @@
             text-align: center;
         }
 
-        form {
+        .calculator {
             max-width: 400px;
             margin: 0 auto;
             background-color: #fff;
@@ -81,46 +81,96 @@
     </style>
 </head>
 <body>
-    <h2>Position Sizing Calculator</h2>
-    <form id="positionSizer">
-        <label for="maxLoss">Max Loss ($):</label>
-        <input type="number" id="maxLoss" value="5000" required>
+    <h2>Position Sizing Calculators</h2>
 
-        <label for="stopLossPoints">Stop Loss (Points):</label>
-        <input type="number" id="stopLossPoints" required>
+    <div class="calculator" id="niftyCalculator">
+        <h3>Nifty Calculator</h3>
+        <form id="positionSizerNifty">
+            <label for="maxLossNifty">Max Loss ($):</label>
+            <input type="number" id="maxLossNifty" required>
 
-        <label for="lotSize">Lot Size:</label>
-        <input type="number" id="lotSize" value="50" required>
+            <label for="stopLossPointsNifty">Stop Loss (Points):</label>
+            <input type="number" id="stopLossPointsNifty" required>
 
-        <button type="button" onclick="calculatePositionSize()">Calculate</button>
-    </form>
+            <button type="button" onclick="calculatePositionSize('nifty')">Calculate</button>
+        </form>
 
-    <h3>Result:</h3>
-    <p id="positionSizeResult">Fill in the details and click 'Calculate'.</p>
+        <p id="positionSizeResultNifty">Fill in the details and click 'Calculate'.</p>
 
-    <button id="resetButton" onclick="resetForm()">Reset Form</button>
+        <button id="resetButtonNifty" onclick="resetForm('nifty')">Reset Form</button>
+    </div>
+
+    <div class="calculator" id="bankNiftyCalculator">
+        <h3>Bank Nifty Calculator</h3>
+        <form id="positionSizerBankNifty">
+            <label for="maxLossBankNifty">Max Loss ($):</label>
+            <input type="number" id="maxLossBankNifty" required>
+
+            <label for="stopLossPointsBankNifty">Stop Loss (Points):</label>
+            <input type="number" id="stopLossPointsBankNifty" required>
+
+            <button type="button" onclick="calculatePositionSize('banknifty')">Calculate</button>
+        </form>
+
+        <p id="positionSizeResultBankNifty">Fill in the details and click 'Calculate'.</p>
+
+        <button id="resetButtonBankNifty" onclick="resetForm('banknifty')">Reset Form</button>
+    </div>
+
+    <div class="calculator" id="finNiftyCalculator">
+        <h3>Fin Nifty Calculator</h3>
+        <form id="positionSizerFinNifty">
+            <label for="maxLossFinNifty">Max Loss ($):</label>
+            <input type="number" id="maxLossFinNifty" required>
+
+            <label for="stopLossPointsFinNifty">Stop Loss (Points):</label>
+            <input type="number" id="stopLossPointsFinNifty" required>
+
+            <button type="button" onclick="calculatePositionSize('finnifty')">Calculate</button>
+        </form>
+
+        <p id="positionSizeResultFinNifty">Fill in the details and click 'Calculate'.</p>
+
+        <button id="resetButtonFinNifty" onclick="resetForm('finnifty')">Reset Form</button>
+    </div>
 
     <script>
-        function calculatePositionSize() {
-            var maxLoss = parseFloat(document.getElementById('maxLoss').value);
-            var stopLossPoints = parseFloat(document.getElementById('stopLossPoints').value);
-            var lotSize = parseFloat(document.getElementById('lotSize').value);
+        function calculatePositionSize(symbol) {
+            var maxLoss = parseFloat(document.getElementById('maxLoss' + symbol).value);
+            var stopLossPoints = parseFloat(document.getElementById('stopLossPoints' + symbol).value);
 
-            if (isNaN(maxLoss) || isNaN(stopLossPoints) || isNaN(lotSize)) {
+            if (isNaN(maxLoss) || isNaN(stopLossPoints)) {
                 alert('Please enter valid numerical values.');
                 return;
             }
 
+            var lotSize;
+
+            // Set lot size based on the selected symbol
+            switch (symbol) {
+                case 'nifty':
+                    lotSize = 50;
+                    break;
+                case 'banknifty':
+                    lotSize = 15;
+                    break;
+                case 'finnifty':
+                    lotSize = 40;
+                    break;
+                default:
+                    lotSize = 1; // Default to 1 in case of an unknown symbol
+            }
+
             var lot = maxLoss / (stopLossPoints * lotSize);
 
-            var resultElement = document.getElementById('positionSizeResult');
-            resultElement.innerHTML = 'You should buy ' + lot.toFixed(2) + ' lots.';
+            var resultElement = document.getElementById('positionSizeResult' + symbol);
+            resultElement.innerHTML = 'You should buy ' + lot.toFixed(2) + ' lots of ' + symbol + '.';
             resultElement.style.opacity = 1;
         }
 
-        function resetForm() {
-            document.getElementById('positionSizer').reset();
-            document.getElementById('positionSizeResult').style.opacity = 0;
+        function resetForm(symbol) {
+            document.getElementById('positionSizer' + symbol).reset();
+            document.getElementById('positionSizeResult' + symbol).style.opacity = 0;
         }
     </script>
 </body>
