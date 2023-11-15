@@ -102,6 +102,9 @@
                 <label for="lotSizeNifty">Lot Size:</label>
                 <input type="number" id="lotSizeNifty" value="50" required>
 
+                <label for="marginNifty">Margin per Lot ($):</label>
+                <input type="number" id="marginNifty" value="130000" required>
+
                 <button type="button" onclick="calculatePositionSize('Nifty')">Calculate</button>
             </form>
 
@@ -121,6 +124,9 @@
 
                 <label for="lotSizeBankNifty">Lot Size:</label>
                 <input type="number" id="lotSizeBankNifty" value="15" required>
+
+                <label for="marginBankNifty">Margin per Lot ($):</label>
+                <input type="number" id="marginBankNifty" value="100000" required>
 
                 <button type="button" onclick="calculatePositionSize('BankNifty')">Calculate</button>
             </form>
@@ -142,6 +148,9 @@
                 <label for="lotSizeFinNifty">Lot Size:</label>
                 <input type="number" id="lotSizeFinNifty" value="40" required>
 
+                <label for="marginFinNifty">Margin per Lot ($):</label>
+                <input type="number" id="marginFinNifty" value="120000" required>
+
                 <button type="button" onclick="calculatePositionSize('FinNifty')">Calculate</button>
             </form>
 
@@ -156,16 +165,18 @@
             var maxLoss = parseFloat(document.getElementById('maxLoss' + symbol).value);
             var stopLossPoints = parseFloat(document.getElementById('stopLossPoints' + symbol).value);
             var lotSize = parseFloat(document.getElementById('lotSize' + symbol).value);
+            var margin = parseFloat(document.getElementById('margin' + symbol).value);
 
-            if (isNaN(maxLoss) || isNaN(stopLossPoints) || isNaN(lotSize)) {
+            if (isNaN(maxLoss) || isNaN(stopLossPoints) || isNaN(lotSize) || isNaN(margin)) {
                 alert('Please enter valid numerical values.');
                 return;
             }
 
-            var lot = maxLoss / (stopLossPoints * lotSize);
+            var lot = Math.floor(maxLoss / (stopLossPoints * lotSize)); // Round down the lot value
+            var totalMargin = lot * margin;
 
             var resultElement = document.getElementById('positionSizeResult' + symbol);
-            resultElement.innerHTML = 'You should buy ' + lot.toFixed(2) + ' lots of ' + symbol + '.';
+            resultElement.innerHTML = `You should buy ${lot} lots of ${symbol}. Total Margin: $${totalMargin.toFixed(2)}.`;
             resultElement.style.opacity = 1;
         }
 
