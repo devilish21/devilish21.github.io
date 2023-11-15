@@ -84,10 +84,13 @@
     <h2>Position Sizing Calculator</h2>
     <form id="positionSizer">
         <label for="maxLoss">Max Loss ($):</label>
-        <input type="number" id="maxLoss" required>
+        <input type="number" id="maxLoss" value="5000" required>
 
         <label for="stopLossPoints">Stop Loss (Points):</label>
         <input type="number" id="stopLossPoints" required>
+
+        <label for="lotSize">Lot Size:</label>
+        <input type="number" id="lotSize" value="50" required>
 
         <button type="button" onclick="calculatePositionSize()">Calculate</button>
     </form>
@@ -101,14 +104,14 @@
         function calculatePositionSize() {
             var maxLoss = parseFloat(document.getElementById('maxLoss').value);
             var stopLossPoints = parseFloat(document.getElementById('stopLossPoints').value);
+            var lotSize = parseFloat(document.getElementById('lotSize').value);
 
-            if (isNaN(maxLoss) || isNaN(stopLossPoints)) {
+            if (isNaN(maxLoss) || isNaN(stopLossPoints) || isNaN(lotSize)) {
                 alert('Please enter valid numerical values.');
                 return;
             }
 
-            var lotsize = 50; // You can set this to any fixed value
-            var lot = maxLoss / (stopLossPoints * lotsize);
+            var lot = maxLoss / (stopLossPoints * lotSize);
 
             var resultElement = document.getElementById('positionSizeResult');
             resultElement.innerHTML = 'You should buy ' + lot.toFixed(2) + ' lots.';
