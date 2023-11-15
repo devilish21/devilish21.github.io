@@ -99,11 +99,19 @@
 
     <script>
         function calculatePositionSize() {
-            // For a fixed lot size of 50
-            var lotSize = 50;
+            var maxLoss = parseFloat(document.getElementById('maxLoss').value);
+            var stopLossPoints = parseFloat(document.getElementById('stopLossPoints').value);
+
+            if (isNaN(maxLoss) || isNaN(stopLossPoints)) {
+                alert('Please enter valid numerical values.');
+                return;
+            }
+
+            var lotsize = 50; // You can set this to any fixed value
+            var lot = maxLoss / (stopLossPoints * lotsize);
 
             var resultElement = document.getElementById('positionSizeResult');
-            resultElement.innerHTML = 'You should buy ' + lotSize + ' lots.';
+            resultElement.innerHTML = 'You should buy ' + lot.toFixed(2) + ' lots.';
             resultElement.style.opacity = 1;
         }
 
