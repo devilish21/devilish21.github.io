@@ -84,6 +84,22 @@
             color: #fff;
             margin-top: 15px;
         }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 <body>
@@ -94,7 +110,7 @@
             <h3>Nifty Calculator</h3>
             <form id="positionSizerNifty">
                 <label for="maxLossNifty">Max Loss ($):</label>
-                <input type="number" id="maxLossNifty" required>
+                <input type="number" id="maxLossNifty" value="5000" required>
 
                 <label for="stopLossPointsNifty">Stop Loss (Points):</label>
                 <input type="number" id="stopLossPointsNifty" required>
@@ -102,7 +118,7 @@
                 <button type="button" onclick="calculatePositionSize('nifty')">Calculate</button>
             </form>
 
-            <p id="positionSizeResultNifty">Fill in the details and click 'Calculate'.</p>
+            <p id="positionSizeResultNifty"></p>
 
             <button class="resetButton" onclick="resetForm('nifty')">Reset Form</button>
         </div>
@@ -111,7 +127,7 @@
             <h3>Bank Nifty Calculator</h3>
             <form id="positionSizerBankNifty">
                 <label for="maxLossBankNifty">Max Loss ($):</label>
-                <input type="number" id="maxLossBankNifty" required>
+                <input type="number" id="maxLossBankNifty" value="5000" required>
 
                 <label for="stopLossPointsBankNifty">Stop Loss (Points):</label>
                 <input type="number" id="stopLossPointsBankNifty" required>
@@ -119,7 +135,7 @@
                 <button type="button" onclick="calculatePositionSize('banknifty')">Calculate</button>
             </form>
 
-            <p id="positionSizeResultBankNifty">Fill in the details and click 'Calculate'.</p>
+            <p id="positionSizeResultBankNifty"></p>
 
             <button class="resetButton" onclick="resetForm('banknifty')">Reset Form</button>
         </div>
@@ -128,7 +144,7 @@
             <h3>Fin Nifty Calculator</h3>
             <form id="positionSizerFinNifty">
                 <label for="maxLossFinNifty">Max Loss ($):</label>
-                <input type="number" id="maxLossFinNifty" required>
+                <input type="number" id="maxLossFinNifty" value="5000" required>
 
                 <label for="stopLossPointsFinNifty">Stop Loss (Points):</label>
                 <input type="number" id="stopLossPointsFinNifty" required>
@@ -136,7 +152,7 @@
                 <button type="button" onclick="calculatePositionSize('finnifty')">Calculate</button>
             </form>
 
-            <p id="positionSizeResultFinNifty">Fill in the details and click 'Calculate'.</p>
+            <p id="positionSizeResultFinNifty"></p>
 
             <button class="resetButton" onclick="resetForm('finnifty')">Reset Form</button>
         </div>
@@ -173,6 +189,19 @@
 
             var resultElement = document.getElementById('positionSizeResult' + symbol);
             resultElement.innerHTML = 'You should buy ' + lot.toFixed(2) + ' lots of ' + symbol + '.';
+
+            // Show the result table
+            var resultTable = '<table>';
+            resultTable += '<tr><th>Max Loss ($)</th><th>Stop Loss (Points)</th><th>Lot Size</th><th>Lots to Buy</th></tr>';
+            resultTable += '<tr>';
+            resultTable += '<td>' + maxLoss + '</td>';
+            resultTable += '<td>' + stopLossPoints + '</td>';
+            resultTable += '<td>' + lotSize + '</td>';
+            resultTable += '<td>' + lot.toFixed(2) + '</td>';
+            resultTable += '</tr>';
+            resultTable += '</table>';
+
+            resultElement.innerHTML += resultTable;
             resultElement.style.opacity = 1;
         }
 
