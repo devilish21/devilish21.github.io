@@ -99,18 +99,11 @@
 
     <script>
         function calculatePositionSize() {
-            var maxLoss = parseFloat(document.getElementById('maxLoss').value);
-            var stopLossPoints = parseFloat(document.getElementById('stopLossPoints').value);
-
-            if (isNaN(maxLoss) || isNaN(stopLossPoints)) {
-                alert('Please enter valid numerical values.');
-                return;
-            }
-
-            var lotSize = maxLoss / (stopLossPoints * 20);
+            // For a fixed lot size of 50
+            var lotSize = 50;
 
             var resultElement = document.getElementById('positionSizeResult');
-            resultElement.innerHTML = 'You can buy ' + lotSize.toFixed(50) + ' lots.';
+            resultElement.innerHTML = 'You should buy ' + lotSize + ' lots.';
             resultElement.style.opacity = 1;
         }
 
