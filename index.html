@@ -93,7 +93,7 @@
         <div class="calculator" id="niftyCalculator">
             <h3>Nifty Calculator</h3>
             <form id="positionSizerNifty">
-                <label for="maxLossNifty">Max Loss ($):</label>
+                <label for="maxLossNifty">Max Loss (Rs):</label>
                 <input type="number" id="maxLossNifty" value="5000" required>
 
                 <label for="stopLossPointsNifty">Stop Loss (Points):</label>
@@ -102,7 +102,7 @@
                 <label for="lotSizeNifty">Lot Size:</label>
                 <input type="number" id="lotSizeNifty" value="50" required>
 
-                <label for="marginNifty">Margin per Lot ($):</label>
+                <label for="marginNifty">Margin per Lot (Rs):</label>
                 <input type="number" id="marginNifty" value="130000" required>
 
                 <button type="button" onclick="calculatePositionSize('Nifty')">Calculate</button>
@@ -116,7 +116,7 @@
         <div class="calculator" id="bankNiftyCalculator">
             <h3>Bank Nifty Calculator</h3>
             <form id="positionSizerBankNifty">
-                <label for="maxLossBankNifty">Max Loss ($):</label>
+                <label for="maxLossBankNifty">Max Loss (Rs):</label>
                 <input type="number" id="maxLossBankNifty" value="5000" required>
 
                 <label for="stopLossPointsBankNifty">Stop Loss (Points):</label>
@@ -125,7 +125,7 @@
                 <label for="lotSizeBankNifty">Lot Size:</label>
                 <input type="number" id="lotSizeBankNifty" value="15" required>
 
-                <label for="marginBankNifty">Margin per Lot ($):</label>
+                <label for="marginBankNifty">Margin per Lot (Rs):</label>
                 <input type="number" id="marginBankNifty" value="100000" required>
 
                 <button type="button" onclick="calculatePositionSize('BankNifty')">Calculate</button>
@@ -139,7 +139,7 @@
         <div class="calculator" id="finNiftyCalculator">
             <h3>Fin Nifty Calculator</h3>
             <form id="positionSizerFinNifty">
-                <label for="maxLossFinNifty">Max Loss ($):</label>
+                <label for="maxLossFinNifty">Max Loss (Rs):</label>
                 <input type="number" id="maxLossFinNifty" value="5000" required>
 
                 <label for="stopLossPointsFinNifty">Stop Loss (Points):</label>
@@ -148,7 +148,7 @@
                 <label for="lotSizeFinNifty">Lot Size:</label>
                 <input type="number" id="lotSizeFinNifty" value="40" required>
 
-                <label for="marginFinNifty">Margin per Lot ($):</label>
+                <label for="marginFinNifty">Margin per Lot (Rs):</label>
                 <input type="number" id="marginFinNifty" value="120000" required>
 
                 <button type="button" onclick="calculatePositionSize('FinNifty')">Calculate</button>
@@ -176,7 +176,7 @@
             var totalMargin = lot * margin;
 
             var resultElement = document.getElementById('positionSizeResult' + symbol);
-            resultElement.innerHTML = `You should buy ${lot} lots of ${symbol}.<br>Total Margin: $${totalMargin.toFixed(2)}.`;
+            resultElement.innerHTML = `You should buy ${lot} lots of ${symbol}.<br>Total Margin: Rs${totalMargin.toFixed(2)}.`;
             resultElement.style.opacity = 1;
         }
 
