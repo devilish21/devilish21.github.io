@@ -98,7 +98,26 @@
     <button id="resetButton" onclick="resetForm()">Reset Form</button>
 
     <script>
-        // Your JavaScript code here
+        function calculatePositionSize() {
+            var maxLoss = parseFloat(document.getElementById('maxLoss').value);
+            var stopLossPoints = parseFloat(document.getElementById('stopLossPoints').value);
+
+            if (isNaN(maxLoss) || isNaN(stopLossPoints)) {
+                alert('Please enter valid numerical values.');
+                return;
+            }
+
+            var lotSize = maxLoss / (stopLossPoints * 20);
+
+            var resultElement = document.getElementById('positionSizeResult');
+            resultElement.innerHTML = 'You can buy ' + lotSize.toFixed(2) + ' lots.';
+            resultElement.style.opacity = 1;
+        }
+
+        function resetForm() {
+            document.getElementById('positionSizer').reset();
+            document.getElementById('positionSizeResult').style.opacity = 0;
+        }
     </script>
 </body>
 </html>
